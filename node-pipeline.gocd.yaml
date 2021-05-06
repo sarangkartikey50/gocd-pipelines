@@ -3,10 +3,10 @@ pipelines:
   node-ci:
     group: NODEJS-GOCD
     materials:
-      node-pr-listener:
+      mygit:
         git: git@github.com:sarangkartikey50/nodejs-github-actions.git
         autoUpdate: false
-        shallowClose: true
+        shallowClose: false
         branch: main
     stages:
       - install-dependencies:
@@ -24,3 +24,30 @@ pipelines:
                     arguments:
                       - "-c"
                       - "npm run lint"
+  build:
+    group: NODEJS-GOCD
+      materials:
+        mygit:
+          git: git@github.com:sarangkartikey50/nodejs-github-actions.git
+          autoUpdate: false
+          shallowClone: false
+          branch: main
+      stages:
+        - build-and-test:
+          clean_workspace: true
+          jobs:
+            build:
+              tasks:
+                - exec:
+                    command: bash
+                    arguments:
+                      - "-c"
+                      - "npm run build"
+          jobs:
+            test:
+              tasks:
+                - exect:
+                    command: bash
+                    arguments:
+                      - "-c"
+                      - "npm run test"
