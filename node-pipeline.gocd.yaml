@@ -7,8 +7,6 @@ pipelines:
         options:
           url: git@github.com:sarangkartikey50/nodejs-github-actions.git
         autoUpdate: false
-        shallowClone: true
-        branch: master
     stages:
       - install-dependencies:
           clean_workspace: true
