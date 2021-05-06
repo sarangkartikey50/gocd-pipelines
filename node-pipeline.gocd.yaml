@@ -1,28 +1,94 @@
-format_version: 3
+format_version: 10
 pipelines:
-  node-ci:
-    group: My-Pipelines
+  Build-and-Test-Pipeline:
+    group: Example-Pipelines-Simple
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1
     materials:
-      node-pr-listener:
-        plugin_configuration:
-          id: github.pr
-          version: 1
-        options:
-          url: git@github.com:sarangkartikey50/nodejs-github-actions.git
-        autoUpdate: false
+      git-3ff60a5:
+        git: ../../data/test-repo
+        shallow_clone: false
+        auto_update: true
+        branch: master
     stages:
-      - install-dependencies:
-          clean_workspace: true
-          jobs:
-            lint-checks:
-              tasks:
-                - exec:
-                    command: bash
-                    arguments:
-                      - "-c"
-                      - "npm i"
-                - exec:
-                    command: bash
-                    arguments:
-                      - "-c"
-                      - "npm run lint"
+    - build:
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
+          allow_only_on_success: false
+        jobs:
+          package:
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - '"Tasks for packaging are executed here.."'
+                command: echo
+                run_if: passed
+          generate-docs:
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - '"Tasks for generating documentation are executed here..."'
+                command: echo
+                run_if: passed
+    - test:
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
+          allow_only_on_success: false
+        jobs:
+          lint:
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - '"Tasks for linting are executed here..."'
+                command: echo
+                run_if: passed
+          unit-test:
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - '"Tasks for running unit tests are executed here..."'
+                command: echo
+                run_if: passed
+          integration-test:
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - '"Tasks for running integration tests are executed here..."'
+                command: echo
+                run_if: passed
+          vulnerability-scan:
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - '"Tasks for running vulnerability scan executed here..."'
+                command: echo
+                run_if: passed
+    - deploy-to-integration-env:
+        fetch_materials: true
+        keep_artifacts: false
+        clean_workspace: false
+        approval:
+          type: success
+          allow_only_on_success: false
+        jobs:
+          push-to-server:
+            timeout: 0
+            tasks:
+            - exec:
+                arguments:
+                - '"Tasks for deploying to integration environment are executed here.."'
+                command: echo
+                run_if: passed
