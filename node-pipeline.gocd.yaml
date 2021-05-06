@@ -11,7 +11,7 @@ pipelines:
           url: git@github.com:sarangkartikey50/nodejs-gocd.git
         autoUpdate: false
     stages:
-      - install-dependencies
+      - install-dependencies:
           clean_workspace: true
           jobs:
             lint-checks:
