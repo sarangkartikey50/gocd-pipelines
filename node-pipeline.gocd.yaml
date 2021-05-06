@@ -6,7 +6,7 @@ pipelines:
       mygit:
         git: git@github.com:sarangkartikey50/nodejs-github-actions.git
         autoUpdate: false
-        shallowClose: false
+        shallowClone: false
         branch: main
     stages:
       - install-dependencies:
@@ -29,26 +29,26 @@ pipelines:
         branch: main
     stages:
       - create-build:
-        clean_workspace: true
-        jobs:
-          build:
-            tasks:
-              - exec:
-                  command: bash
-                  arguments:
-                    - "-c"
-                    - "npm run build"
+          clean_workspace: true
+          jobs:
+            build:
+              tasks:
+                - exec:
+                    command: bash
+                    arguments:
+                      - "-c"
+                      - "npm run build"
       - run-tests:
-        jobs:
-          test:
-            tasks:
-              - exec:
-                  command: bash
-                  arguments:
-                    - "-c"
-                    - "npm run test"
-              - exec:
-                  command: bash
-                  arguments:
-                    - "-c"
-                    - "npm run lint"
+          jobs:
+            test:
+              tasks:
+                - exec:
+                    command: bash
+                    arguments:
+                      - "-c"
+                      - "npm run test"
+                - exec:
+                    command: bash
+                    arguments:
+                      - "-c"
+                      - "npm run lint"
