@@ -11,6 +11,9 @@ pipelines:
     stages:
       - install-dependencies:
           clean_workspace: true
+          keep_artifacts: true
+          approval:
+            type: success
           jobs:
             install:
               tasks:
@@ -22,14 +25,15 @@ pipelines:
   build-and-test:
     group: NODEJS-GOCD
     materials:
-      mygit:
-        git: git@github.com:sarangkartikey50/nodejs-github-actions.git
-        autoUpdate: false
-        shallowClone: false
-        branch: main
+      node-ci:
+        pipeline: node-ci
+        stage: install-dependencies
     stages:
       - create-build:
           clean_workspace: true
+          keep_artifacts: true
+          approval:
+            type: success
           jobs:
             build:
               tasks:
@@ -39,6 +43,10 @@ pipelines:
                       - "-c"
                       - "npm run build"
       - run-tests:
+          clean_workspace: true
+          keep_artifacts: true
+          approval:
+            type: success
           jobs:
             test:
               tasks:
