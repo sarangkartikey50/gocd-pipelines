@@ -4,9 +4,6 @@ pipelines:
     group: NODEJS-GOCD
     materials:
       node-pr-listener:
-        plugin_configuration:
-          id: github.pr
-          version: 1
         options:
           url: git@github.com:sarangkartikey50/nodejs-github-actions.git
         autoUpdate: false
