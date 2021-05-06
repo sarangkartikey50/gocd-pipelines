@@ -1,7 +1,7 @@
 format_version: 3
 pipelines:
   node-ci:
-    group: NODEJS-GOCD
+    group: My-Pipelines
     materials:
       node-pr-listener:
         plugin_configuration:
