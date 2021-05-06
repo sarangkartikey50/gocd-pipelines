@@ -1,4 +1,4 @@
-format_version: 3
+format_version: 10
 pipelines:
   node-ci:
     group: NODEJS-GOCD
@@ -6,7 +6,7 @@ pipelines:
       node-pr-listener:
         options:
           url: git@github.com:sarangkartikey50/nodejs-github-actions.git
-        autoUpdate: false
+        auto_update: false
     stages:
       - install-dependencies:
           clean_workspace: true
