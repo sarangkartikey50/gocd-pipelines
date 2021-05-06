@@ -8,7 +8,7 @@ pipelines:
           id: github.pr
           version: 1
         options:
-          url: git@github.com:sarangkartikey50/nodejs-gocd.git
+          url: git@github.com:sarangkartikey50/nodejs-github-actions.git
         autoUpdate: false
     stages:
       - install-dependencies:
