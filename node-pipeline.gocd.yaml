@@ -17,12 +17,12 @@ pipelines:
             lint-checks:
               tasks:
                 - exec:
-                  command: bash
-                  arguments:
-                    - "-c"
-                    - "npm i"
+                    command: bash
+                    arguments:
+                      - "-c"
+                      - "npm i"
                 - exec:
-                  command: bash
-                  arguments:
-                    - "-c"
-                    - "npm run lint"
+                    command: bash
+                    arguments:
+                      - "-c"
+                      - "npm run lint"
