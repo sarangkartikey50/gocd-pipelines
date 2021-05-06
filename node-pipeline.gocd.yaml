@@ -4,9 +4,10 @@ pipelines:
     group: NODEJS-GOCD
     materials:
       node-pr-listener:
-        options:
-          url: git@github.com:sarangkartikey50/nodejs-github-actions.git
+        git: git@github.com:sarangkartikey50/nodejs-github-actions.git
         autoUpdate: false
+        shallowClose: true
+        branch: main
     stages:
       - install-dependencies:
           clean_workspace: true
