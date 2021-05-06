@@ -12,7 +12,7 @@ pipelines:
       - install-dependencies:
           clean_workspace: true
           jobs:
-            lint-checks:
+            install:
               tasks:
                 - exec:
                     command: bash
@@ -28,7 +28,7 @@ pipelines:
         shallowClone: false
         branch: main
     stages:
-      - build:
+      - create-build:
         clean_workspace: true
         jobs:
           build:
@@ -38,7 +38,7 @@ pipelines:
                   arguments:
                     - "-c"
                     - "npm run build"
-      - test:
+      - run-tests:
         jobs:
           test:
             tasks:
