@@ -1,6 +1,6 @@
 format_version: 3
 pipelines:
-  node-ci:
+  build-and-test:
     group: NODEJS-GOCD
     materials:
       mygit:
@@ -22,13 +22,6 @@ pipelines:
                     arguments:
                       - "-c"
                       - "npm i"
-  build-and-test:
-    group: NODEJS-GOCD
-    materials:
-      node-ci:
-        pipeline: node-ci
-        stage: install-dependencies
-    stages:
       - create-build:
           clean_workspace: true
           keep_artifacts: true
