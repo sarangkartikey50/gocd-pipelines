@@ -19,7 +19,7 @@ pipelines:
                     arguments:
                       - "-c"
                       - "npm i"
-  build:
+  build-and-test:
     group: NODEJS-GOCD
     materials:
       mygit:
@@ -28,7 +28,7 @@ pipelines:
         shallowClone: false
         branch: main
     stages:
-      - build-and-test:
+      - build:
         clean_workspace: true
         jobs:
           build:
@@ -38,6 +38,7 @@ pipelines:
                   arguments:
                     - "-c"
                     - "npm run build"
+      - test:
         jobs:
           test:
             tasks:
