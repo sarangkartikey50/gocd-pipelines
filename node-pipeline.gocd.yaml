@@ -1,0 +1,28 @@
+format_version: 3
+pipelines:
+  node-ci:
+    group: NODEJS-GOCD
+    materials:
+      node-pr-listener:
+        plugin_configuration:
+          id: github.pr
+          version: 1
+        options:
+          url: git@github.com:sarangkartikey50/nodejs-gocd.git
+        autoUpdate: false
+    stages:
+      - install-dependencies
+          clean_workspace: true
+          jobs:
+            lint-checks:
+              tasks:
+                - exec:
+                  command: bash
+                  arguments:
+                    - "-c"
+                    - "npm i"
+                - exec:
+                  command: bash
+                  arguments:
+                    - "-c"
+                    - "npm run lint"
